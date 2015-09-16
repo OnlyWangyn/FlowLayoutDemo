@@ -91,7 +91,7 @@ public class FlowLayout extends ViewGroup {
                 }else{
                     //have to change to new line
                     maxWidth = Math.max(singleLineWidth,childWidth);
-                    mLineHeightList.add(singleLineHeight);
+                    mLineHeightList.add(singleLineHeight);// currently singleLineHeight is the height of last line
                     maxHeight += singleLineHeight;
                     singleLineWidth = childWidth;// initial width value of new line
                     singleLineHeight = childHeight;// initial height value of new line
@@ -123,7 +123,7 @@ public class FlowLayout extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        
+
         int top = 0;
         int left = 0;
         for(int i =0;i<mLineViewsList.size();i++){
@@ -139,6 +139,7 @@ public class FlowLayout extends ViewGroup {
                 left += view.getMeasuredWidth() + lp.rightMargin
                         + lp.leftMargin;
             }
+            //start new line ,reset the start position in X,increase the start position in Y
             left = 0;
             int lineHeight = mLineHeightList.get(i).intValue();
             top+=lineHeight;

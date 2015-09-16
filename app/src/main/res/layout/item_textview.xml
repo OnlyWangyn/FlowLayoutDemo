@@ -6,4 +6,5 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:textSize="16sp"
+    android:drawableRight="@mipmap/ic_remove"
     android:background="@drawable/bg_textview"/>

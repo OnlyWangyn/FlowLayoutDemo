@@ -1,10 +1,12 @@
 package com.wyn.flowlayout.activity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -61,6 +63,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         layoutParams.leftMargin = 8;
         layoutParams.topMargin = 8;
         layoutParams.bottomMargin =8;
-        mFlowLayout.addView(textView,layoutParams);
+        textView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                TextView tv = (TextView) v;
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    int x = (int) event.getRawX();
+                    Drawable drawableRight = tv.getCompoundDrawables()[2];
+                    if (x > (tv.getRight() - drawableRight.getBounds().width())) {
+                        mFlowLayout.removeView(tv);
+                    }
+                }
+                return false;
+            }
+        });
+        mFlowLayout.addView(textView, layoutParams);
+
     }
 }
